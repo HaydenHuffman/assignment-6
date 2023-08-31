@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CarSales {
 	private String month;
@@ -98,6 +100,17 @@ public class CarSales {
 			 
 		
 	}
+	
+	 public static void printYearlySalesReport(String modelName, List<CarSales> sales) {
+	        Set<String> years = sales.stream()
+	                				 .map(sale -> sale.getMonth().substring(4, 6))
+	                				 .collect(Collectors.toSet());
+
+	        years.forEach(year -> {
+	            int totalSales = CarSales.totalSold(sales, year);
+	            System.out.println("20" + year + " -> " + totalSales);
+	        });
+	    }
 	
 	
 }
